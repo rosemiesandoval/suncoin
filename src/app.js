@@ -43,6 +43,7 @@ App = {
 },
 
 	loadAccount: async () => {
+    web3.eth.defaultAccount = web3.eth.accounts[0]
 	App.account = web3.eth.accounts[0]
 	//console.log(App.account)
 	},
@@ -106,6 +107,13 @@ App = {
         $newTaskTemplate.show()
       }
     },  
+
+    createTask: async () => {
+      App.setLoading(true)
+      const content = $('#newTask').val()
+      await App.todoList.createTask(content)
+      window.location.reload()
+    },
   setLoading: (boolean) => {
     App.loading = boolean
     const loader = $('#loader')
